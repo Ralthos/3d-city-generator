@@ -16,10 +16,10 @@ You need Node.js installed on your computer. This project includes Three.js loca
 2. Run:
 
 ```powershell
-npm start
+node server.mjs
 ```
 
-Alternatively, run `node server.mjs`.
+If Windows says running scripts is disabled when you type `npm start`, use `node server.mjs` (or `npm.cmd start`) instead.
 
 3. Open **http://127.0.0.1:4173** in your browser.
 4. Keep the terminal running while using the website. Press **Ctrl+C** to stop it.
@@ -55,7 +55,7 @@ The `dist` folder contains the editable website source and the bundled libraries
 From the project folder in the VS Code terminal:
 
 ```powershell
-npm test
+node --test tests/city.test.mjs
 ```
 
 ## Included in the Desktop copy
