@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f9fb"><meta name="description" content="Generate a 3D city and adjust its size, building density, and height."><title>3D Procedural City Generator</title><link rel="stylesheet" href="style.css"><script type="importmap">{"imports":{"three":"./three.module.js"}}</script></head>
+<body>
+<div id="canvas" aria-label="Interactive 3D city"><div id="loading">Generating city…</div></div>
+<header><a class="brand" href="./">3D Procedural City Generator</a><button id="aboutButton" class="text-button">Help</button></header>
+<aside class="panel" aria-label="City settings">
+  <div class="panel-heading"><h1>City settings</h1></div>
+  <nav class="tabs" aria-label="Control sections"><button class="tab active" id="layoutTab" data-tab="layout" aria-selected="true">Layout</button><button class="tab" id="weatherTab" data-tab="weather" aria-selected="false">View</button><button class="tab" id="exportTab" data-tab="export" aria-selected="false">Save</button></nav>
+  <div class="panel-scroll">
+    <section id="layoutPanel" class="tab-panel">
+      <div class="control"><label for="size">City size <output id="sizeValue">6 × 6</output></label><input id="size" type="range" min="3" max="12" value="6"></div>
+      <div class="control"><label for="density">Building density <output id="densityValue">80%</output></label><input id="density" type="range" min="0" max="100" value="80"></div>
+      <div class="control"><label for="height">Maximum height <output id="heightValue">120 m</output></label><input id="height" type="range" min="20" max="200" step="10" value="120"></div>
+      <details><summary>More settings</summary>
+        <div class="control"><label for="parks">Parks <output id="parksValue">20%</output></label><input id="parks" type="range" min="0" max="60" step="5" value="20"></div>
+        <div class="control"><label for="road">Road width <output id="roadValue">Medium</output></label><input id="road" type="range" min="0" max="2" step="1" value="1"></div>
+        <label class="field-label" for="seed">City seed</label><div class="seed-field"><input id="seed" type="text" value="METRO-2026" maxlength="48" spellcheck="false"><button id="applySeed" title="Generate using this seed">Apply</button><button id="copySeed" title="Copy seed">Copy</button></div>
+        <p class="note">Use the same seed and settings to recreate a city.</p>
+      </details>
+      <p class="note">Adjust a slider to update the city.</p>
+    </section>
+    <section id="weatherPanel" class="tab-panel" hidden>
+      <label class="field-label">Lighting</label><div class="lighting-grid"><button class="lighting active" data-light="day">Day</button><button class="lighting" data-light="golden">Sunset</button><button class="lighting" data-light="night">Night</button></div>
+      <div class="setting-row"><span>Rain</span><button id="rain" class="switch" role="switch" aria-checked="false" aria-label="Rain"><span></span></button></div>
+      <div class="setting-row"><span>Auto-rotate</span><button id="rotate" class="switch" role="switch" aria-checked="false" aria-label="Auto-rotate"><span></span></button></div>
+    </section>
+    <section id="exportPanel" class="tab-panel" hidden>
+      <button id="capture" class="export-card"><strong>Download image</strong><small>Current view as a PNG file</small></button>
+      <button id="saveLayout" class="export-card"><strong>Download layout</strong><small>City settings and buildings as JSON</small></button>
+    </section>
+  </div>
+  <div class="panel-footer"><button id="generate" class="primary">Generate new city</button><div id="status" role="status">City ready.</div></div>
+</aside>
+<div class="view-bar"><div class="segmented" aria-label="Camera view"><button id="perspective" class="active">3D view</button><button id="top">Top view</button></div><button id="reset" title="Reset camera">Reset</button><button id="zoomIn" aria-label="Zoom in" title="Zoom in">＋</button><button id="zoomOut" aria-label="Zoom out" title="Zoom out">−</button></div>
+<div class="bottom-bar"><div class="stats"><div><strong id="buildingCount">—</strong><span>buildings</span></div><div><strong id="blockCount">—</strong><span>blocks</span></div><div><strong id="greenCount">—</strong><span>parks</span></div></div><p class="navigation-hint">Drag to rotate · Scroll to zoom · Right-drag to move</p></div>
+<span id="seedBadge" hidden>METRO-2026</span>
+<dialog id="about"><button id="closeAbout" aria-label="Close help">×</button><h2>How to use</h2><p>Adjust city size, building density, and maximum height with the sliders. Select <strong>Generate new city</strong> for another layout.</p><p>Drag to rotate, scroll or pinch to zoom, and right-drag or use two fingers to move the view.</p><p>Open <strong>More settings</strong> for parks, road width, and a repeatable city seed. Use <strong>View</strong> for lighting and <strong>Save</strong> to download an image or layout.</p></dialog>
+<script type="module" src="app.js"></script></body></html>
