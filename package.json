@@ -1,0 +1,10 @@
+{
+  "name": "3d-procedural-city-generator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A customizable 3D procedural city generator built with Three.js.",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/city.test.mjs"
+  }
+}
